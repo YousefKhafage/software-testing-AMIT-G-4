@@ -1,52 +1,51 @@
-import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import pages.contactUsPage;
-import pages.page001Home;
-import pages.page03Login;
 
 import java.time.Duration;
 
-public class contactUsTest {
-    WebDriver driver;
-    page001Home home;
-    contactUsPage contact;
-    SoftAssert softassert = new SoftAssert();
-    Faker fake = new Faker();
-    String name = fake.name().fullName();
-    String email = fake.internet().safeEmailAddress();
+import pages.page04ContactUs;
 
+public class contactUsTest {
+
+    WebDriver driver;
+    page04ContactUs contact;
 
     @BeforeMethod
-    public void openBrowser() {
+    public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        driver.get("https://automationexercise.com/");
+        driver.get("https://automationexercise.com");
+        contact = new page04ContactUs(driver);
     }
 
     @Test
-    public void testCase6() {
-        home = new page001Home(driver);
-        contact = new contactUsPage(driver);
-        String url = driver.getCurrentUrl();
-        softassert.assertEquals(url, "https://automationexercise.com/");
-        home.clickOnContactUs();
-        softassert.assertTrue(driver.findElement(By.cssSelector("div[class=\"contact-form\"] h2[class=\"title text-center\"]")).isDisplayed());
-        contact.enterEmailSubjectMessageUpload(name, email, "message", "subject", "C:\\Users\\bassa\\OneDrive\\Desktop");
-        contact.clickOnSubmit();
-        driver.switchTo().alert().accept();
-        softassert.assertTrue(driver.findElement(By.cssSelector("div[class=\"status alert alert-success\"]")).isDisplayed());
-        contact.clickOnHome();
-        softassert.assertEquals(url, "https://automationexercise.com/");
-        softassert.assertAll();
+    public void ContactUsFormTest6() {
+
+        contact.clickContactUs();
+
+        contact.fillForm("Yousef", "test@test.com", "Test", "test the contact us form automatic");
+
+        String filePath = "C:\\Users\\Excellent Store\\OneDrive\\Pictures\\Screenshots\\test.png";
+        contact.uploadFile(filePath);
+
+        contact.submitForm();
+        contact.acceptAlert();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        Assert.assertTrue(contact.isSuccessMessageVisible());
+
+        contact.clickHomeButton();
+        Assert.assertTrue(contact.isHomePageVisible());
     }
 
     @AfterMethod
