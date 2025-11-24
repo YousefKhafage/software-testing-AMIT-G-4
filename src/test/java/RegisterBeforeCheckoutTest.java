@@ -13,7 +13,7 @@ import pages.page001Home;
 import pages.page02Signup;
 import pages.RegisterBeforeCheckoutPage;
 import java.time.Duration;
-public class RegisterBeforeCheckoutTest extends base {
+public class RegisterBeforeCheckoutTest{
     Faker fake = new Faker();
     String email = fake.internet().safeEmailAddress();
     String password = fake.internet().password();
@@ -22,9 +22,6 @@ public class RegisterBeforeCheckoutTest extends base {
     page02Signup signUp;
     SoftAssert softassert = new SoftAssert();
 
-    public RegisterBeforeCheckoutTest(WebDriver driver) {
-        super(driver);
-    }
 
     @BeforeMethod
     public void openBrowser() {
