@@ -22,7 +22,9 @@ public class RegisterBeforeCheckoutTest extends base {
     page02Signup signUp;
     SoftAssert softassert = new SoftAssert();
 
-
+    public RegisterBeforeCheckoutTest(WebDriver driver) {
+        super(driver);
+    }
 
     @BeforeMethod
     public void openBrowser() {
