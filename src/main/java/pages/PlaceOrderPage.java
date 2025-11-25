@@ -129,8 +129,12 @@ public class PlaceOrderPage {
 
     public void payAndConfirm() throws InterruptedException {
         Thread.sleep(1500);
-        driver.findElement(By.id("submit")).click();
+
+        WebElement payBtn = driver.findElement(By.id("submit"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", payBtn);
     }
+
     public boolean isOrderSuccessMessageVisible() {
         return driver.findElement(By.xpath("//*[contains(text(),'successfully')]")).isDisplayed();
     }
