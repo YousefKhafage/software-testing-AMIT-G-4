@@ -10,10 +10,13 @@ import java.time.Duration;
 
 public class page05AllProduct extends base{
     Actions actions;
+    WebDriverWait wait;
 
     public page05AllProduct(WebDriver driver) {
         super(driver);
         actions=new Actions(driver);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     }
     protected final By allProductsButton=By.xpath("//*[@href=\"/products\"]");
     protected final By product1Button=By.cssSelector("a[href=\"/product_details/1\"]");
@@ -27,7 +30,10 @@ public class page05AllProduct extends base{
     protected final By viewCart=By.xpath("//u[text()='View Cart']");
     protected final By quantity=By.id("quantity");
     protected final By addToCartInPageDetails=By.cssSelector("button[class=\"btn btn-default cart\"]");
-
+    private final By productsButton = By.xpath("//a[@href='/products']");
+    private final By brandsSideBar = By.xpath("//div[@class='brands_products']");
+    private final By brandNames = By.xpath("//div[@class='brands-name']//li");
+    private final By productList = By.xpath("//div[@class='product-image-wrapper']");
     public void clickOnAllProducts(){
         clickOn(allProductsButton);
     }
@@ -85,6 +91,20 @@ public class page05AllProduct extends base{
     }
     public void AddToCartInPageDetails(){
         clickOn(addToCartInPageDetails);
+    }
+
+    public boolean isBrandsVisible() {
+        return driver.findElement(brandsSideBar).isDisplayed();
+
+    }
+    public void clickBrand(String brandName) {
+        By brand = By.xpath("//a[text()='" + brandName + "']");
+        clickOn(brand);
+    }
+    public boolean isBrandPageLoaded(String brandName) {
+        By header = By.xpath("//h2[contains(text(),'" + brandName + "')]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(header));
+        return driver.findElements(productList).size() > 0;
     }
 }
 
