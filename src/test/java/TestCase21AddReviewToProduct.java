@@ -4,6 +4,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import pages.ScrollUPandDown;
 
 import java.time.Duration;
 
@@ -51,9 +52,16 @@ public class TestCase21AddReviewToProduct {
                 By.xpath("//h2[contains(text(),'All Products')]")));
         Assert.assertTrue(allProductsTitle.isDisplayed(), "ALL PRODUCTS page not loaded!");
 
+        // Sometimes an ad popup appears, try closing if it exists
+        clickIfExists(By.xpath("//a[@id='dismiss-button']"));
+        ScrollUPandDown page = new ScrollUPandDown(driver);
+
+        page.scrollDown();
+
+
         // Step 5: Click first 'View Product' button
         wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("(//a[contains(text(),'View Product')])[1]"))).click();
+                By.xpath("/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[2]/ul/li/a"))).click();
 
         // Step 6: Verify 'Write Your Review' is visible
         WebElement reviewTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(
