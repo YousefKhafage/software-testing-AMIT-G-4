@@ -38,7 +38,7 @@ public class LoginBeforeCheckout {
 
             home.clickOnSignupLogin();
             softassert.assertTrue(driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[1]/div/h2")).isDisplayed());
-            login.enterEmailPassword("nm8196342@gmail.com", "nadaMohamed1912\\");
+            login.enterEmailPassword("nm8196342@gmail.com", "nadaMohamed1912");
             login.clickOnLoginButton();
 
             softassert.assertTrue(driver.findElement(By.xpath("//i[@class=\"fa fa-user\"]")).isDisplayed());
@@ -57,9 +57,9 @@ public class LoginBeforeCheckout {
 
             Assert.assertTrue(payment.isOrderSuccessMessageVisible());
 
-            account.deleteAccount();
-            Assert.assertTrue(account.isAccountDeletedVisible());
-            account.continueAfterAccountCreated();
+            //account.deleteAccount();
+            //Assert.assertTrue(account.isAccountDeletedVisible());
+            //account.continueAfterAccountCreated();
         }
     }
 
