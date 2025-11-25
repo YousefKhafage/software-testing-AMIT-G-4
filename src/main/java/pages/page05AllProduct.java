@@ -24,7 +24,7 @@ public class page05AllProduct extends base{
     protected final By Product1=By.xpath("//*[@class=\"productinfo text-center\"]//*[@data-product-id=\"1\"]");
     protected final By Product2=By.xpath("//*[@class=\"productinfo text-center\"]//*[@data-product-id=\"2\"]");
     protected final By continueShopping=By.cssSelector("button[class=\"btn btn-success close-modal btn-block\"]");
-    protected final By viewCart=By.xpath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a");
+    protected final By viewCart=By.xpath("//u[text()='View Cart']");
     protected final By quantity=By.id("quantity");
     protected final By addToCartInPageDetails=By.cssSelector("button[class=\"btn btn-default cart\"]");
 
@@ -66,8 +66,16 @@ public class page05AllProduct extends base{
 
 
     public void clickViewCart() {
-
-        clickOn(viewCart);
+        By viewCartBtn = viewCart; // موجود أصلاً عندك
+        try {
+            // Option 1: Use WebDriverWait to wait until clickable
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.elementToBeClickable(viewCartBtn)).click();
+        } catch (Exception e) {
+            // Option 2: Fallback to JavaScript click if normal click fails
+            WebElement viewCartElement = driver.findElement(viewCartBtn);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", viewCartElement);
+        }
     }
     public void updateQuantity(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -11,6 +11,10 @@ public class base {
         PageFactory.initElements(driver,this);
 
     }
+
+    public base() {
+    }
+
     public void clickOn(By by){
         driver.findElement(by).click();
     }

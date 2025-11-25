@@ -58,12 +58,14 @@ public class RegisterBeforeCheckoutPage {
         driver.findElement(proceedToCheckoutBtn).click();
     }
 
-    public void enterOrderComment(String txt) {
-        driver.findElement(commentTextArea).sendKeys(txt);
+    public void enterOrderComment(String comment) throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.name("message")).sendKeys(comment);
     }
 
-    public void clickPlaceOrder() {
-        driver.findElement(placeOrderBtn).click();
+    public void clickPlaceOrder() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//a[text()='Place Order']")).click();
     }
     public void payAndConfirm() {
         WebElement payButton = driver.findElement(By.id("submit"));
@@ -99,4 +101,5 @@ public class RegisterBeforeCheckoutPage {
     public void continueAfterAccountCreated() {
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
     }
+
 }
