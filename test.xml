@@ -5,6 +5,23 @@
         <classes>
             <class name="loginTest"></class>
             <class name="signUpTest"></class>
+            <class name="BrandTest"></class>
+            <class name="LoginBeforeCheckout"></class>
+            <class name="PlaceOrderTest"></class>
+            <class name="RegisterBeforeCheckoutTest"></class>
+            <class name="RemoveProductFromCart"></class>
+            <class name="ViewCategoryProducts"></class>
+            <class name="cartTest"></class>
+            <class name="contactUsTest"></class>
+            <class name="DownloadInvoice"></class>
+            <class name="page04testcaseTest"></class>
+            <class name="footerTest"></class>
+            <class name="page05AllProductsTest"></class>
+            <class name="ScrollTest"></class>
+            <class name="TestCase20_SearchProducts_and_VerifyCartAfterLogin"></class>
+            <class name="TestCase21AddReviewToProduct"></class>
+            <class name="TestCase22AddToCartFromRecommendedItems"></class>
+            <class name="TestCase23VerifyAddressDetailsInCheckoutPage"></class>
         </classes>
     </test>
 </suite>
